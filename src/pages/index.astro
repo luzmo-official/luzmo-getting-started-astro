@@ -1,0 +1,40 @@
+---
+import Luzmo from '@luzmo/nodejs-sdk';
+import LuzmoClientComponent from '../components/luzmo-client-component';
+
+const client = new Luzmo({
+  api_key: import.meta.env.LUZMO_API_KEY!,
+  api_token: import.meta.env.LUZMO_API_TOKEN!,
+  host: import.meta.env.PUBLIC_LUZMO_API_HOST!,
+});
+
+const response = await client.create('authorization', {
+  type: 'embed',
+  username: 'user id',
+  name: 'first name last name',
+  email: 'name@email.com',
+  access: {
+    datasets: [
+      {
+        id: '<dataset_id>',
+        rights: 'use',
+      },
+    ],
+  },
+});
+
+const { id, token } = response;
+---
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <LuzmoClientComponent authKey={id} authToken={token} client:load />
+  </body>
+</html>
