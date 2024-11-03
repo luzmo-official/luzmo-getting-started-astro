@@ -16,7 +16,7 @@ const response = await client.create('authorization', {
   access: {
     datasets: [
       {
-        id: '<dataset_id>',
+        id: '6f18525f-7b4f-4726-bc20-ccc4665d3091',
         rights: 'use',
       },
     ],
@@ -35,6 +35,6 @@ const { id, token } = response;
     <title>Astro</title>
   </head>
   <body>
-    <LuzmoClientComponent authKey={id} authToken={token} client:load />
+    <LuzmoClientComponent authKey={id} authToken={token} client:only='react' />
   </body>
 </html>
